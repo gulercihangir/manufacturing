@@ -1,7 +1,7 @@
 # manufacturing
 ## Installation
 
-Clone the repository:
+Clone the repository:(OUR CODE QILL BE IN INTEGRATEDSYSTEMNEW)
 
 ```bash
 git clone https://github.com/gulercihangir/manufacturing.git
