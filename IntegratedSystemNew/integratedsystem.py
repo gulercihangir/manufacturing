@@ -388,6 +388,12 @@ class Simulation(object):
             if job.current_location in sequential_ws:
                 current_ws = next(ws for ws in self.workstations if ws.location == job.current_location)
                 index_previous = self.workstations.index(current_ws) - 1 
+
+                if index_previous <0 or index_previous >= len(self.workstations):
+                    print("previous index out of range!")
+                    print("current_ws:", current_ws.location)
+                    print("index_previous:", index_previous)
+                    return
                 previous_location = self.workstations[index_previous]
                 if len(previous_location.blocked_entities) > 0:
                     job_to_transport = previous_location.blocked_entities[0]
