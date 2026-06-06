@@ -849,6 +849,10 @@ def run_experiment():
 
 def print_results(results):
     results = [r for r in results if r is not None]
+    if len(results) ==0:
+        print("No valid replications ciompleted")
+        return
+
     
     """Print statistics"""
     avg_queue   = np.mean([r["avg_queue"]            for r in results], axis=0)
