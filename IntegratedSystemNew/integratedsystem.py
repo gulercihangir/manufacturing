@@ -361,6 +361,12 @@ class Simulation(object):
             job.transport_entry_time = None
 
             # Set next destinatin of job
+            if job.current_op >= len(job.route):
+                print("Error: job.current_op out of range")
+                print("job id:", job.id)
+                print("current_op:", job.current_op)
+                print("route:", job.route)
+            
             destination = job.route[job.current_op]
             # Unblock the machine unit of the workstation
             if job.current_location != 00:
@@ -374,9 +380,9 @@ class Simulation(object):
                     #self.request_workstations(ws)
 
             if job.current_location == 10 and len(self.waiting_prep_station) > 0:
-                job_to_transport = self.waiting_prep_station[0]
+                job_to_transport = self.waiting_prep_station.pop(0)
                 self.transport_queue.append(job_to_transport)
-                job_to_transport.time_to_transport = self.now
+                job_to_transport.time_to_transport = self.now if self.collecting else None
             
             sequential_ws = [20,30,40,50,60]
             if job.current_location in sequential_ws:
