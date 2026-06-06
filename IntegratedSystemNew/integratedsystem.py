@@ -621,7 +621,7 @@ class Simulation(object):
             if ws.resources == ws.replenishment_level:
                 amount_of_tasks_needed = ws.trolley_spots - ws.replenishment_level
                 while amount_of_tasks_needed > 0:
-                    self.replenishment_counter =+ 1
+                    self.replenishment_counter += 1
                     replenishment_task = Job(self.replenishment_counter, "Replenishment", [ws_location], None)
                     self.replenishment_queue.append(replenishment_task)
                     replenishment_task.replenishment_entry_time = self.now if self.collecting else None 
@@ -755,6 +755,10 @@ class Simulation(object):
         T = self.now - warmup
 
         completed = [j for j in self.completed_jobs if j.departure_time > warmup]
+        print("Total completed jobs:", len(self.completed_jobs))
+        if len(self.completed_jobs) > 0:
+            print( "Last completion time:", max(j.departure_time for j in self.completed_jobs))
+        
 
         if len(completed) == 0:
             print("WARNING: No completed jobs after warmup!")
@@ -838,6 +842,8 @@ def run_experiment():
     print_results(results)
 
 def print_results(results):
+    results = [r for r in results if r is not None]
+    
     """Print statistics"""
     avg_queue   = np.mean([r["avg_queue"]            for r in results], axis=0)
     max_queue   = np.mean([r["max_queue"]            for r in results], axis=0)
