@@ -862,7 +862,7 @@ def print_results(results):
     avg_tq      = np.mean([r["avg_transport_queue"]  for r in results])
     max_tq      = np.mean([r["max_transport_queue"]  for r in results])
     avg_system  = np.mean([r["avg_system"]           for r in results])
-    avg_ws_wait = np.mean([r["avg_ws_wait"]          for r in results])
+    
     avg_tp_wait = np.mean([r["avg_transport_wait"]   for r in results])
 
     LW = 35   # label width
@@ -902,7 +902,7 @@ def print_results(results):
     print(f"{'Average daily throughput'     :<{LW}}{throughput:>{SW}.2f}")
     print(f"{'Average number in queue'      :<{LW}}{avg_system:>{SW}.2f}")
     print(f"{'Average time in system'       :<{LW}}{flow_time:>{SW}.2f}")
-    print(f"{'Average total time in queues':<{LW}}{avg_ws_wait:>{SW}.2f}")        
+    
     print(f"{'Average total wait for transport':<{LW}}{avg_tp_wait:>{SW}.2f}")  
     print(f"{'Proportion agvs moving loaded':<{LW}}{agv_loaded:>{SW}.2f}")
     print(f"{'Proportion atvs moving empty' :<{LW}}{agv_empty:>{SW}.2f}")
